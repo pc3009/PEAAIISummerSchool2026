@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Summer Camp | From Curiosity to Creation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --purple: #6c4cff;
+            --blue: #27a9ff;
+            --pink: #ff4fa3;
+            --orange: #ff9f43;
+            --yellow: #ffd93d;
+            --green: #35d07f;
+            --dark: #182033;
+            --light: #f7f8ff;
+            --white: #ffffff;
+            --gray: #687086;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            color: var(--dark);
+            background: var(--light);
+            line-height: 1.65;
+        }
+
+        /* ---------- HERO ---------- */
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 10% 20%, #ffdf5d 0, transparent 18%),
+                radial-gradient(circle at 90% 15%, #ff5cac 0, transparent 22%),
+                radial-gradient(circle at 80% 85%, #28c7ff 0, transparent 22%),
+                linear-gradient(135deg, #5938e8, #2677f5 50%, #12b9a5);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+        }
+
+        .hero::before {
+            width: 400px;
+            height: 400px;
+            background: white;
+            top: -180px;
+            left: -150px;
+        }
+
+        .hero::after {
+            width: 500px;
+            height: 500px;
+            background: white;
+            bottom: -300px;
+            right: -150px;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5.8rem);
+            line-height: 1.05;
+            margin-bottom: 25px;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+            max-width: 800px;
+            margin: auto;
+            opacity: 0.95;
+        }
+
+        .hero-tagline {
+            margin-top: 35px;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        /* ---------- NAV ---------- */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 3px 20px rgba(0,0,0,0.08);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 13px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--purple);
+        }
+
+        /* ---------- GENERAL ---------- */
+
+        section {
+            padding: 90px 20px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title .eyebrow {
+            text-transform: uppercase;
+            color: var(--purple);
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            line-height: 1.15;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* ---------- PROGRAM STRUCTURE ---------- */
+
+        .structure {
+            background: white;
+        }
+
+        .schedule {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .schedule-card {
+            padding: 35px;
+            border-radius: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-card.lecture {
+            background: linear-gradient(135deg, #704cff, #9a68ff);
+        }
+
+        .schedule-card.lab {
+            background: linear-gradient(135deg, #00a8e8, #00c9a7);
+        }
+
+        .schedule-card .number {
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.25;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+
+        .schedule-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .schedule-card p {
+            opacity: 0.95;
+        }
+
+        .final-goal {
+            margin-top: 35px;
+            text-align: center;
+            background: linear-gradient(90deg, #fff0a6, #ffd7ed);
+            padding: 25px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1.15rem;
+        }
+
+        /* ---------- OUTCOMES ---------- */
+
+        .outcomes {
+            background: linear-gradient(180deg, #f7f8ff, #eef7ff);
+        }
+
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .outcome-card {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 12px 35px rgba(40,50,100,0.08);
+            border-top: 6px solid var(--purple);
+        }
+
+        .outcome-card:nth-child(2) {
+            border-color: var(--pink);
+        }
+
+        .outcome-card:nth-child(3) {
+            border-color: var(--green);
+        }
+
+        .outcome-card:nth-child(4) {
+            border-color: var(--orange);
+        }
+
+        .outcome-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .outcome-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-left: 22px;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        /* ---------- DAYS ---------- */
+
+        .days {
+            background: white;
+        }
+
+        .day {
+            margin-bottom: 55px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(30,40,80,0.12);
+            background: white;
+        }
+
+        .day-header {
+            color: white;
+            padding: 35px 40px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .day1 .day-header {
+            background: linear-gradient(135deg, #6c4cff, #9c6cff);
+        }
+
+        .day2 .day-header {
+            background: linear-gradient(135deg, #008cff, #26c6da);
+        }
+
+        .day3 .day-header {
+            background: linear-gradient(135deg, #9b45e4, #e5489b);
+        }
+
+        .day4 .day-header {
+            background: linear-gradient(135deg, #ff7a18, #ffb347);
+        }
+
+        .day5 .day-header {
+            background: linear-gradient(135deg, #00a878, #35d07f);
+        }
+
+        .day-number {
+            width: 75px;
+            height: 75px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .day-header h3 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            line-height: 1.2;
+        }
+
+        .day-body {
+            padding: 40px;
+        }
+
+        .day-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .day-section h4 {
+            color: var(--purple);
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .day-section p {
+            color: var(--gray);
+        }
+
+        .research-box {
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fff5d6, #ffe8f3);
+            border-left: 6px solid var(--orange);
+        }
+
+        .research-box h4 {
+            color: #d56b00;
+        }
+
+        .lab-list li {
+            margin-bottom: 10px;
+        }
+
+        .deliverable {
+            margin-top: 35px;
+            background: #f0f4ff;
+            border-radius: 18px;
+            padding: 25px;
+            border-left: 6px solid var(--purple);
+        }
+
+        .deliverable strong {
+            color: var(--purple);
+        }
+
+        /* ---------- PROJECTS ---------- */
+
+        .projects {
+            background: linear-gradient(135deg, #f2efff, #eafaff);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            transition: transform 0.25s, box-shadow 0.25s;
+            box-shadow: 0 10px 30px rgba(30,40,80,0.07);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(30,40,80,0.13);
+        }
+
+        .project-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card:nth-child(1) h3 {
+            color: var(--purple);
+        }
+
+        .project-card:nth-child(2) h3 {
+            color: var(--pink);
+        }
+
+        .project-card:nth-child(3) h3 {
+            color: #9b45e4;
+        }
+
+        .project-card:nth-child(4) h3 {
+            color: var(--green);
+        }
+
+        /* ---------- SHOWCASE ---------- */
+
+        .showcase {
+            text-align: center;
+            color: white;
+            background:
+                radial-gradient(circle at 20% 20%, #ffdf5d 0, transparent 15%),
+                radial-gradient(circle at 80% 80%, #ff4fa3 0, transparent 18%),
+                linear-gradient(135deg, #3d27b5, #1575d1);
+        }
+
+        .showcase h2 {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            margin-bottom: 20px;
+        }
+
+        .showcase p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 1.15rem;
+            opacity: 0.95;
+        }
+
+        .showcase-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 45px;
+        }
+
+        .showcase-box {
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 30px 20px;
+            border-radius: 22px;
+            backdrop-filter: blur(10px);
+        }
+
+        .showcase-box .icon {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+        }
+
+        /* ---------- COLLEGE ---------- */
+
+        .college {
+            background: white;
+        }
+
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .advantage {
+            padding: 35px;
+            border-radius: 25px;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .advantage .big-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--purple);
+        }
+
+        .advantage:nth-child(2) .big-number {
+            color: var(--pink);
+        }
+
+        .advantage:nth-child(3) .big-number {
+            color: var(--green);
+        }
+
+        .advantage h3 {
+            margin: 10px 0;
+        }
+
+        /* ---------- ENHANCEMENTS ---------- */
+
+        .enhancements {
+            background: #f6f3ff;
+        }
+
+        .enhancement-list {
+            max-width: 750px;
+            margin: auto;
+            display: grid;
+            gap: 15px;
+        }
+
+        .enhancement {
+            background: white;
+            padding: 22px 25px;
+            border-radius: 15px;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(30,40,80,0.06);
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            text-align: center;
+            padding: 45px 20px;
+            color: white;
+            background: var(--dark);
+        }
+
+        footer h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+
+        @media (max-width: 800px) {
+
+            .schedule,
+            .outcome-grid,
+            .day-grid,
+            .project-grid,
+            .advantages,
+            .showcase-boxes {
+                grid-template-columns: 1fr;
+            }
+
+            .day-header {
+                padding: 25px;
+            }
+
+            .day-body {
+                padding: 25px;
+            }
+
+            .day-number {
+                width: 60px;
+                height: 60px;
+            }
+
+            nav {
+                position: relative;
+            }
+
+            .nav-inner {
+                gap: 12px 18px;
+            }
+
+            section {
+                padding: 65px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HERO ================= -->
+
+<header class="hero">
+    <div class="hero-content">
+
+        <div class="badge">☀️ 5-DAY AI SUMMER CAMP</div>
+
+        <h1>
+            From <span>Curiosity</span><br>
+            to Creation
+        </h1>
+
+        <p class="hero-subtitle">
+            Build Your First AI Project & Research Portfolio
+        </p>
+
+        <p class="hero-tagline">
+            🤖 Explore AI &nbsp; • &nbsp;
+            🔬 Learn Research &nbsp; • &nbsp;
+            🎨 Create Something Amazing
+        </p>
+
+    </div>
+</header>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+    <div class="nav-inner">
+        <a href="#structure">Program</a>
+        <a href="#outcomes">Outcomes</a>
+        <a href="#days">5-Day Journey</a>
+        <a href="#projects">Projects</a>
+        <a href="#showcase">Showcase</a>
+        <a href="#college">College Applications</a>
+    </div>
+</nav>
+
+
+<!-- ================= PROGRAM STRUCTURE ================= -->
+
+<section class="structure" id="structure">
+
+    <div class="container">
+
+        <div class="section-title">
+            <div class="eyebrow">The Experience</div>
+            <h2>Six Hours of Learning & Building Every Day</h2>
+            <p>
+                A unique combination of big-picture ideas from professors
+                and hands-on creation led by PhD researchers.
+            </p>
+        </div>
+
+        <div class="schedule">
+
+            <div class="schedule-card lecture">
+                <div class="number">3H</div>
+                <h3>🎓 Professor Lecture</h3>
+                <p>
+                    Concepts, big ideas, fascinating questions,
+                    and the intellectual foundations behind modern AI.
+                </p>
+            </div>
+
+            <div class="schedule-card lab">
+                <div class="number">3H</div>
+                <h3>🧪 PhD-Led Lab</h3>
+                <p>
+                    Get hands-on. Experiment, code, visualize,
+                    build, test, and turn ideas into working projects.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="final-goal">
+            🚀 Final Goal:
+            A complete AI project + research-style write-up + presentation
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= OUTCOMES ================= -->
+
+<section class="outcomes" id="outcomes">
+
+    <div class="container">
+
+        <div class="section-title">
+            <div class="eyebrow">What You'll Achieve</div>
+            <h2>Leave With More Than Just Knowledge</h2>
+            <p>
+                By the end of the camp, every student will have created
+                something they can proudly show others.
+            </p>
+        </div>
+
+        <div class="outcome-grid">
+
+            <div class="outcome-card">
+                <div class="outcome-icon">🚀</div>
+                <h3>1. Portfolio-Ready AI Project</h3>
+
+                <ul>
+                    <li>A working AI project</li>
+                    <li>Interpretability, creative AI, chatbot, or classifier</li>
+                    <li>Demo through video, slides, or live presentation</li>
+                    <li>Optional GitHub repository</li>
+                </ul>
+            </div>
+
+            <div class="outcome-card">
+                <div class="outcome-icon">🔬</div>
+                <h3>2. Research-Style Write-Up</h3>
+
+                <ul>
+                    <li>Research question</li>
+                    <li>Background & context</li>
+                    <li>Method & design</li>
+                    <li>Results & observations</li>
+                    <li>Reflection & limitations</li>
+                </ul>
+
+                <p style="margin-top:15px;">
+                    Useful for college applications, research competitions,
+                    and future research opportunities.
+                </p>
+            </div>
+
+            <div class="outcome-card">
+                <div class="outcome-icon">💡</div>
+                <h3>3. Beginner-Friendly Research Framework</h3>
+
+                <ul>
+                    <li>Ask strong, original questions</li>
+                    <li>Search and evaluate information</li>
+                    <li>Design simple experiments</li>
+                    <li>Interpret results logically</li>
+                </ul>
+            </div>
+
+            <div class="outcome-card">
+                <div class="outcome-icon">🎤</div>
+                <h3>4. Communication & Presentation</h3>
+
+                <ul>
+                    <li>Explain technical ideas clearly</li>
+                    <li>Tell a compelling project story</li>
+                    <li>Build a strong academic narrative</li>
+                    <li>Present work like a young researcher</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= 5 DAYS ================= -->
+
+<section class="days" id="days">
+
+    <div class="container">
+
+        <div class="section-title">
+            <div class="eyebrow">The 5-Day Journey</div>
+            <h2>Five Days. Five Big Questions.</h2>
+            <p>
+                Each day introduces a new dimension of artificial intelligence,
+                while moving students closer to their final project.
+            </p>
+        </div>
+
+
+        <!-- DAY 1 -->
+
+        <article class="day day1">
+
+            <div class="day-header">
+
+                <div class="day-number">01</div>
+
+                <div>
+                    <h3>What Is Intelligence?</h3>
+                    <p>+ How to Do Research</p>
+                </div>
+
+            </div>
+
+            <div class="day-body">
+
+                <div class="day-grid">
+
+                    <div class="day-section">
+                        <h4>🎯 Learning Objectives</h4>
+
+                        <ul>
+                            <li>Understand what AI is — and isn't</li>
+                            <li>Compare human vs. machine intelligence</li>
+                            <li>Learn how to think like a researcher from scratch</li>
+                        </ul>
+                    </div>
+
+                    <div class="day-section">
+                        <h4>🧠 Mini-Lectures</h4>
+
+                        <ul>
+                            <li>What is Intelligence?</li>
+                            <li>How neural networks learn</li>
+                            <li>Word embeddings as "vibes in math space"</li>
+                            <li>Why large models feel intelligent</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="research-box">
+
+                    <h4>🔬 Special Session: From Zero to One — How to Start Research</h4>
+
+                    <p style="margin-bottom:15px;">
+                        Designed specifically for students with no prior
+                        research experience.
+                    </p>
+
+                    <ul>
+                        <li>What research really is</li>
+                        <li>Turn curiosity into meaningful questions</li>
+                        <li>Why do AI models hallucinate?</li>
+                        <li>Why do models show bias?</li>
+                        <li>How to formulate a strong research question</li>
+                        <li>How to find and use resources</li>
+                        <li>How to design a simple experiment</li>
+                        <li>How to analyze results and draw conclusions</li>
+                    </ul>
+
+                    <p style="margin-top:20px; font-weight:800;">
+                        🌟 By the end: each student develops one original
+                        AI-related research question.
+                    </p>
+
+                </div>
+
+                <div class="day-section" style="margin-top:35px;">
+                    <h4>🧪 Hands-On Lab</h4>
+
+                    <ul class="lab-list">
+                        <li><strong>Embedding Playground</strong> — explore analogies such as "king - man + woman = ?"</li>
+                        <li><strong>Build a Tiny Neural Network</strong> — visual or beginner-friendly Python demo</li>
+                        <li><strong>Vibe Classifier</strong> — classify text as happy, academic, chaotic, etc.</li>
+                    </ul>
+                </div>
+
+                <div class="deliverable">
+                    <strong>🏆 Day 1 Deliverable:</strong>
+                    A clearly defined research question + initial idea for the final project.
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- DAY 2 -->
+
+        <article class="day day2">
+
+            <div class="day-header">
+
+                <div class="day-number">02</div>
+
+                <div>
+                    <h3>Inside the Black Box</h3>
+                    <p>Mechanistic Interpretability</p>
+                </div>
+
+            </div>
+
+            <div class="day-body">
+
+                <div class="day-grid">
+
+                    <div class="day-section">
+                        <h4>🎯 Learning Objectives</h4>
+
+                        <ul>
+                            <li>Understand transformers and attention intuitively</li>
+                            <li>Learn what features and circuits are</li>
+                            <li>Explore how we interpret model behavior</li>
+                        </ul>
+                    </div>
+
+                    <div class="day-section">
+                        <h4>🧠 Mini-Lectures</h4>
+
+                        <ul>
+                            <li>How transformers process text</li>
+                            <li>Attention heads as circuits</li>
+                            <li>Neuron activations and features</li>
+                            <li>The "grokking" phenomenon</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="day-section" style="margin-top:35px;">
+                    <h4>🧪 Hands-On Lab</h4>
+
+                    <ul>
+                        <li>🔥 Attention Heatmap Visualization</li>
+                        <li>🧠 Neuron Exploration</li>
+                        <li>🤖 Tiny Transformer Demo</li>
+                    </ul>
+                </div>
+
+                <div class="deliverable">
+                    <strong>🏆 Day 2 Deliverable:</strong>
+                    Add an interpretability component to the project —
+                    for example, explaining how the model makes decisions.
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- DAY 3 -->
+
+        <article class="day day3">
+
+            <div class="day-header">
+
+                <div class="day-number">03</div>
+
+                <div>
+                    <h3>Consciousness, Minds & Theories of Thought</h3>
+                    <p>Can Machines Really Think?</p>
+                </div>
+
+            </div>
+
+            <div class="day-body">
+
+                <div class="day-grid">
+
+                    <div class="day-section">
+
+                        <h4>🎯 Learning Objectives</h4>
+
+                        <ul>
+                            <li>Explore major theories of consciousness</li>
+                            <li>Compare AI representations with human cognition</li>
+                            <li>Understand limitations of current AI systems</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="day-section">
+
+                        <h4>🧠 Mini-Lectures</h4>
+
+                        <ul>
+                            <li>Global Workspace Theory</li>
+                            <li>Integrated Information Theory</li>
+                            <li>Representation vs. experience</li>
+                            <li>Can machines be conscious?</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="day-section" style="margin-top:35px;">
+
+                    <h4>🧪 Hands-On Lab</h4>
+
+                    <ul>
+                        <li>🧩 Chinese Room Simulation</li>
+                        <li>🗺️ Concept Embedding Exploration</li>
+                        <li>👁️ Self-Awareness Tests using prompt-based experiments</li>
+                    </ul>
+
+                </div>
+
+                <div class="deliverable">
+                    <strong>🏆 Day 3 Deliverable:</strong>
+                    Add a conceptual or philosophical dimension to the project —
+                    useful for essays, interviews, and interdisciplinary thinking.
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- DAY 4 -->
+
+        <article class="day day4">
+
+            <div class="day-header">
+
+                <div class="day-number">04</div>
+
+                <div>
+                    <h3>Vibes, Aesthetics & Creative AI</h3>
+                    <p>Turn AI Into a Creative Partner</p>
+                </div>
+
+            </div>
+
+            <div class="day-body">
+
+                <div class="day-grid">
+
+                    <div class="day-section">
+
+                        <h4>🎯 Learning Objectives</h4>
+
+                        <ul>
+                            <li>Understand generative AI for text and images</li>
+                            <li>Explore latent space and style</li>
+                            <li>Create meaningful AI-generated artifacts</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="day-section">
+
+                        <h4>🧠 Mini-Lectures</h4>
+
+                        <ul>
+                            <li>Latent space as a "vibe landscape"</li>
+                            <li>Style transfer techniques</li>
+                            <li>Ethics and safety in generative AI</li>
+                            <li>Multi-agent creativity systems</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="day-section" style="margin-top:35px;">
+
+                    <h4>🎨 Hands-On Lab</h4>
+
+                    <ul>
+                        <li>🖼️ Image Style Mixing</li>
+                        <li>✨ Text "Vibe Transfer"</li>
+                        <li>📚 Multi-Agent Story Creation</li>
+                    </ul>
+
+                </div>
+
+                <div class="deliverable">
+                    <strong>🏆 Day 4 Deliverable:</strong>
+                    Build the core output of the final project —
+                    visual, narrative, or interactive.
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- DAY 5 -->
+
+        <article class="day day5">
+
+            <div class="day-header">
+
+                <div class="day-number">05</div>
+
+                <div>
+                    <h3>Build, Polish & Present</h3>
+                    <p>Turn Your Idea Into a Finished Project</p>
+                </div>
+
+            </div>
+
+            <div class="day-body">
+
+                <div class="day-grid">
+
+                    <div class="day-section">
+
+                        <h4>🎯 Learning Objectives</h4>
+
+                        <ul>
+                            <li>Finalize and refine the project</li>
+                            <li>Learn how to present like a researcher</li>
+                            <li>Understand responsible AI development</li>
+                        </ul>
+
+                    </div>
+
+                    <div class="day-section">
+
+                        <h4>🧠 Mini-Lectures</h4>
+
+                        <ul>
+                            <li>AI alignment basics</li>
+                            <li>Evaluating AI behavior</li>
+                            <li>How to present technical + creative work</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="deliverable">
+                    <strong>🏆 Day 5 Deliverable:</strong>
+                    A polished AI project, research-style write-up,
+                    and final presentation.
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROJECT OPTIONS ================= -->
+
+<section class="projects" id="projects">
+
+    <div class="container">
+
+        <div class="section-title">
+            <div class="eyebrow">Choose Your Adventure</div>
+            <h2>Final Project Options</h2>
+            <p>
+                Students can follow their interests and create something
+                technical, creative, philosophical, or all three.
+            </p>
+        </div>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+                <h3>🔍 Interpretability Project</h3>
+
+                <ul>
+                    <li>Visualize attention or embeddings</li>
+                    <li>Explore model features</li>
+                    <li>Explain how a model solves a task</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>🎨 Creative AI Project</h3>
+
+                <ul>
+                    <li>AI-generated storybook</li>
+                    <li>AI art portfolio</li>
+                    <li>Custom "vibe" classifier</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>🧠 Philosophy Project</h3>
+
+                <ul>
+                    <li>Design a consciousness test</li>
+                    <li>Explore machine self-awareness</li>
+                    <li>Explain a thought experiment using AI</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>🤖 Mini AI Application</h3>
+
+                <ul>
+                    <li>Build a chatbot persona</li>
+                    <li>Create a simple retrieval (RAG) system</li>
+                    <li>Build a mood or topic classifier</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SHOWCASE ================= -->
+
+<section class="showcase" id="showcase">
+
+    <div class="container">
+
+        <h2>🌟 Final Showcase</h2>
+
+        <p>
+            The camp ends with a mini expo where students share their
+            work with parents, peers, and other students.
+        </p>
+
+        <div class="showcase-boxes">
+
+            <div class="showcase-box">
+                <div class="icon">🎬</div>
+                <h3>Demo</h3>
+                <p>Show what you built.</p>
+            </div>
+
+            <div class="showcase-box">
+                <div class="icon">📊</div>
+                <h3>Poster</h3>
+                <p>Tell the story of your research.</p>
+            </div>
+
+            <div class="showcase-box">
+                <div class="icon">🎤</div>
+                <h3>Presentation</h3>
+                <p>Share your insight with an audience.</p>
+            </div>
+
+        </div>
+
+        <p style="margin-top:40px; font-weight:800;">
+            Final presentations focus on
+            <strong>Clarity • Creativity • Insight</strong>
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COLLEGE APPLICATIONS ================= -->
+
+<section class="college" id="college">
+
+    <div class="container">
+
+        <div class="section-title">
+            <div class="eyebrow">Beyond the Camp</div>
+            <h2>Why This Program Strengthens College Applications</h2>
+            <p>
+                Students don't simply attend a summer program.
+                They leave with evidence of curiosity, initiative, and creation.
+            </p>
+        </div>
+
+        <div class="advantages">
+
+            <div class="advantage">
+
+                <div class="big-number">01</div>
+
+                <h3>🚀 Demonstrated Initiative</h3>
+
+                <ul style="text-align:left;">
+                    <li>Developed an original research question</li>
+                    <li>Completed a self-directed project</li>
+                    <li>Turned curiosity into action</li>
+                </ul>
+
+            </div>
+
+            <div class="advantage">
+
+                <div class="big-number">02</div>
+
+                <h3>🎨 Technical + Creative Portfolio</h3>
+
+                <ul style="text-align:left;">
+                    <li>Tangible AI project</li>
+                    <li>Beyond standard coursework</li>
+                    <li>Evidence of interdisciplinary thinking</li>
+                </ul>
+
+            </div>
+
+            <div class="advantage">
+
+                <div class="big-number">03</div>
+
+                <h3>✨ Strong Personal Narrative</h3>
+
+                <ul style="text-align:left;">
+                    <li>Discovering how AI "thinks"</li>
+                    <li>Investigating model limitations</li>
+                    <li>Building and reflecting on a system</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ENHANCEMENTS ================= -->
+
+<section class="enhancements">
+
+    <div class="container">
+
+        <div class="section-title">
+            <div class="eyebrow">Optional Extras</div>
+            <h2>Take Your Experience Further</h2>
+        </div>
+
+        <div class="enhancement-list">
+
+            <div class="enhancement">
+                🐙 GitHub & Portfolio-Building Workshop
+            </div>
+
+            <div class="enhancement">
+                ✉️ "How to Email Professors" Session
+            </div>
+
+            <div class="enhancement">
+                🏆 Research Competitions Overview
+                — ISEF, Regeneron STS, and more
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>☀️ From Curiosity to Creation</h3>
+
+    <p>
+        5-Day AI Summer Camp for High School Students
+    </p>
+
+    <p style="margin-top:15px;">
+        Explore. Question. Build. Present. 🚀
+    </p>
+
+</footer>
+
+</body>
+</html>
